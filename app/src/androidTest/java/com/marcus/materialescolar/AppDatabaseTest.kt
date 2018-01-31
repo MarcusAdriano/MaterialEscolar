@@ -1,9 +1,8 @@
 package com.marcus.materialescolar
 
-import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import com.marcus.materialescolar.dao.MaterialDao
+import com.marcus.materialescolar.db.dao.MaterialDao
 import com.marcus.materialescolar.db.AppDatabase
 import com.marcus.materialescolar.db.AppDatabaseManager
 import com.marcus.materialescolar.model.Material

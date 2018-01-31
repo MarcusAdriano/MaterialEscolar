@@ -21,7 +21,7 @@ class ListaEscolarTest {
     }
 
     @Test
-    fun totalPriceTest() {
+    fun totalPrice() {
         assert(lista.totalPrice == total)
         lista.deleteMaterial(0)
         assert(lista.totalPrice == 30.0)

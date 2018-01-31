@@ -1,4 +1,4 @@
-package com.marcus.materialescolar.dao
+package com.marcus.materialescolar.db.dao
 
 import android.arch.persistence.room.*
 import com.marcus.materialescolar.model.Material

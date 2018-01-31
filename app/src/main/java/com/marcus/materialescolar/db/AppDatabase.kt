@@ -2,7 +2,7 @@ package com.marcus.materialescolar.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
-import com.marcus.materialescolar.dao.MaterialDao
+import com.marcus.materialescolar.db.dao.MaterialDao
 import com.marcus.materialescolar.model.Material
 
 /**
