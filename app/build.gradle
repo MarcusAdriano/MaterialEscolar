@@ -35,6 +35,7 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room_version"
 
     // tests
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation 'junit:junit:4.12'
 
     kaptAndroidTest "android.arch.persistence.room:testing:$room_version"

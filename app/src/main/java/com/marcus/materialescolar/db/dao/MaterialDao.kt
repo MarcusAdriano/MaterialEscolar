@@ -14,7 +14,7 @@ interface MaterialDao {
     fun getAll() : List<Material>
 
     @Query("SELECT * FROM materiais WHERE id = :id")
-    fun getById(id: Long): Material
+    fun getById(id: Int): Material
 
     @Insert(onConflict = OnConflictStrategy.FAIL)
     fun add(material: Material)
@@ -25,5 +25,6 @@ interface MaterialDao {
     @Delete
     fun delete(material: Material)
 
-
+    @Delete()
+    fun deleteAll(materiais: List<Material>)
 }

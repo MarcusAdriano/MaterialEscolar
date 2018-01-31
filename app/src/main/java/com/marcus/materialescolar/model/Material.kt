@@ -1,19 +1,26 @@
 package com.marcus.materialescolar.model
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
+import android.support.annotation.IntegerRes
 
 /**
  * Created by Marcus on 30-Jan-18.
  *
  */
 @Entity(tableName = "materiais")
+@ForeignKey(entity = Marca::class,
+            childColumns = arrayOf("marcadId"),
+            parentColumns = arrayOf("marcaId"),
+            onDelete = ForeignKey.NO_ACTION,
+            onUpdate = ForeignKey.NO_ACTION)
 open class Material {
 
+    /**
+     * Id (number incremented
+     */
     @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
+    var id: Int = 0
+
     /**
      * Name/description
      */
@@ -32,6 +39,9 @@ open class Material {
     @ColumnInfo(name = "price")
     var price: Double = 0.0
 
+    @ColumnInfo(name = "marcaId")
+    var marcaId: Int = 0
+
     @Ignore
     constructor()
 
@@ -42,10 +52,19 @@ open class Material {
         this.price = price
     }
 
-    constructor(id: Long, name: String, quantity: Int, price: Double) {
+    @Ignore
+    constructor(id: Int, name: String, quantity: Int, price: Double, marcaId: Int) {
         this.id = id
         this.name = name
         this.quantity = quantity
         this.price = price
+        this.marcaId = marcaId
+    }
+
+    constructor(name: String, quantity: Int, price: Double, marcaId: Int) {
+        this.name = name
+        this.quantity = quantity
+        this.price = price
+        this.marcaId = marcaId
     }
 }
