@@ -8,7 +8,7 @@ import com.marcus.materialescolar.Logger
  * Created by Marcus on 31-Jan-18.
  *
  */
-class AppDatabaseManager private constructor(context: Context) {
+class AppDatabaseManager private constructor() {
 
     init {
         Logger.debug("Database manager created!")
@@ -16,13 +16,9 @@ class AppDatabaseManager private constructor(context: Context) {
 
     val databaseName = "mat-esc.db"
     var closed = false
-        private set(value) { closed = value }
-
-    lateinit var database : AppDatabase
-        get
         private set
 
-    lateinit var context : Context
+    lateinit var database : AppDatabase
         get
         private set
 
@@ -38,7 +34,7 @@ class AppDatabaseManager private constructor(context: Context) {
             private set
 
         @Synchronized fun init(context: Context) {
-            instance = AppDatabaseManager(context)
+            instance = AppDatabaseManager()
             instance.database = Room
                     .databaseBuilder(context, AppDatabase::class.java, instance.databaseName)
                     .build()
