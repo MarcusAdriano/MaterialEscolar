@@ -1,5 +1,6 @@
 package com.marcus.materialescolar.db.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import com.marcus.materialescolar.model.Material
 
@@ -11,20 +12,17 @@ import com.marcus.materialescolar.model.Material
 interface MaterialDao {
 
     @Query("SELECT * FROM materiais")
-    fun getAll() : List<Material>
+    fun getAll() : LiveData<List<Material>>
 
     @Query("SELECT * FROM materiais WHERE id = :id")
-    fun getById(id: Int): Material
+    fun getById(id: Long): LiveData<Material>
+
+    @Update
+    fun update(materiais: List<Material>) : Int
 
     @Insert(onConflict = OnConflictStrategy.FAIL)
-    fun add(material: Material)
-
-    @Insert(onConflict = OnConflictStrategy.FAIL)
-    fun addAll(materiais: List<Material>)
+    fun insert(materiais: List<Material>) : List<Long>
 
     @Delete
-    fun delete(material: Material)
-
-    @Delete()
-    fun deleteAll(materiais: List<Material>)
+    fun delete(materiais: List<Material>)  : Int
 }

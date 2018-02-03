@@ -1,7 +1,9 @@
 package com.marcus.materialescolar
 
 import android.app.Application
-import com.marcus.materialescolar.db.AppDatabaseManager
+import com.marcus.materialescolar.db.AppDatabase
+
+
 
 /**
  * Created by Marcus on 30-Jan-18.
@@ -9,15 +11,12 @@ import com.marcus.materialescolar.db.AppDatabaseManager
  */
 class App : Application() {
 
-    override fun onCreate() {
-        super.onCreate()
-        AppDatabaseManager.init(applicationContext)
+    fun getDatabase(): AppDatabase {
+        return AppDatabase.getInstance(this)
     }
 
-    override fun onTerminate() {
-        super.onTerminate()
-        AppDatabaseManager.instance.close()
+    fun getRepository(): DataRepository {
+        return DataRepository.getInstance(getDatabase())
     }
-
 
 }

@@ -7,4 +7,5 @@
 
     <!-- Edited colores -->
     <color name="colorGray">#424242</color>
+    <color name="comment_light_background">#d6d6d6</color>
 </resources>

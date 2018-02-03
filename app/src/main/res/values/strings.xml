@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Material Escolar</string>
+    <string name="loading">Carregando</string>
+    <string name="cd_materiais_list">Content Description</string>
 </resources>

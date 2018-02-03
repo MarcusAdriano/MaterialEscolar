@@ -16,7 +16,7 @@ object ListaEscolar {
 
     fun addMaterial(value: Material) {
         materiais.add(value)
-        totalPrice += value.price * value.quantity
+        totalPrice += value.unityPrice * value.quantity
     }
 
     fun getAll() : List<Material> = materiais
@@ -29,7 +29,7 @@ object ListaEscolar {
 
     fun deleteMaterial(material: Material) : Material {
         materiais.remove(material)
-        totalPrice -= material.price * material.quantity
+        totalPrice -= material.unityPrice * material.quantity
         return material
     }
 

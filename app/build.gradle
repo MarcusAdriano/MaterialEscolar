@@ -4,42 +4,72 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
     defaultConfig {
-        applicationId "com.marcus.materialescolar"
-        minSdkVersion 19
-        targetSdkVersion 26
+        applicationId 'com.example.android.persistence'
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Support libraries
+    implementation deps.support.app_compat
+    implementation deps.support.v4
+    implementation deps.support.design
+    implementation deps.support.cardview
+
     // Kotlin
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation deps.kotlin.stdlib
 
-    // Android support
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
+    // Architecture components (Lifecycle and Live Data, ViewModel)
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    kapt deps.lifecycle.compiler
 
-    // room persistence
-    implementation  "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
+    // Room database SQLite
+    implementation deps.room.runtime
+    kapt deps.room.compiler
 
-    // tests
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testImplementation 'junit:junit:4.12'
+    // Some tests implementation
+    testImplementation deps.kotlin.test
+    testImplementation deps.junit
 
-    kaptAndroidTest "android.arch.persistence.room:testing:$room_version"
+    // Android Testing Support Library's runner and rules
+    kaptAndroidTest deps.atsl.runner
+    kaptAndroidTest deps.atsl.rules
+    kaptAndroidTest deps.room.testing
+    kaptAndroidTest deps.arch_core.testing
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    // Espresso UI Testing
+    kaptAndroidTest deps.espresso.core
+    kaptAndroidTest deps.espresso.contrib
+    kaptAndroidTest deps.espresso.intents
+
+    // Resolve conflicts between main and test APK:
+    kaptAndroidTest deps.support.annotations
+    kaptAndroidTest deps.support.v4
+    kaptAndroidTest deps.support.app_compat
+    kaptAndroidTest deps.support.design
 }
