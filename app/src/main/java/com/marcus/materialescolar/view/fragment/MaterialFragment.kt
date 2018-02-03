@@ -41,7 +41,7 @@ class MaterialFragment : Fragment() {
                 activity.application, arguments.getLong(MaterialFragment.KEY_MATERIAL_ID))
 
         val model = ViewModelProviders.of(this, factory)
-                .get(MaterialViewModel::class.java!!)
+                .get(MaterialViewModel::class.java)
 
         mBinding.model = model
         subscribeToModel(model)
@@ -54,7 +54,7 @@ class MaterialFragment : Fragment() {
                 this, object : Observer<Material> {
 
             override fun onChanged(t: Material?) {
-                model.setProduct(t!!)
+                model.setMaterial(t!!)
             }
         })
     }
