@@ -19,15 +19,16 @@ class MaterialViewModel(application: Application, private val dataRepository: Da
             AndroidViewModel(application) {
 
     private val material: ObservableField<Material> = ObservableField()
-    private val materialId : Long = id
     private val mObservableMaterial: LiveData<Material> = dataRepository.getMaterial(id)
+
+    fun setMaterial(material: Material) {
+        this.material.set(material)
+    }
+
+    fun getMaterial() : Material = material.get()
 
     fun getObservableMaterial(): LiveData<Material> {
         return mObservableMaterial
-    }
-
-    fun setProduct(material: Material) {
-        this.material.set(material)
     }
 
     class Factory(private val mApplication: Application, private val mMaterialId: Long) :
