@@ -30,17 +30,17 @@ class MaterialListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
 
-        mMaterialAdapter = MaterialAdapter(mMaterialCallback);
-        mBinding.productsList.setAdapter(mMaterialAdapter);
+        mMaterialAdapter = MaterialAdapter(mMaterialCallback)
+        mBinding.productsList.setAdapter(mMaterialAdapter)
 
-        return mBinding.getRoot();
+        return mBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val viewModel = ViewModelProviders.of(this).get(MaterialListViewModel::class.java!!)
+        val viewModel = ViewModelProviders.of(this).get(MaterialListViewModel::class.java)
 
         subscribeUi(viewModel)
     }
