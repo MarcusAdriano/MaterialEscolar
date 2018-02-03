@@ -48,6 +48,9 @@ dependencies {
     implementation deps.lifecycle.extensions
     kapt deps.lifecycle.compiler
 
+    // Data Binding
+    kapt deps.databinding
+
     // Room database SQLite
     implementation deps.room.runtime
     kapt deps.room.compiler
