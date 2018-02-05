@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.marcus.materialescolar.R
 import com.marcus.materialescolar.model.Material
 import com.marcus.materialescolar.view.fragment.MaterialFragment
-import android.content.ContentValues.TAG
 import com.marcus.materialescolar.view.fragment.MaterialListFragment
 
 

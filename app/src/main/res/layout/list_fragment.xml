@@ -15,7 +15,8 @@
   ~ limitations under the License.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -40,7 +41,7 @@
             app:visibleGone="@{isLoading}"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/products_list"
+            android:id="@+id/material_list"
             android:contentDescription="@string/cd_materiais_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

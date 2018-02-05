@@ -4,7 +4,6 @@ import android.app.Application
 import com.marcus.materialescolar.db.AppDatabase
 
 
-
 /**
  * Created by Marcus on 30-Jan-18.
  *

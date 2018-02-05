@@ -15,6 +15,7 @@ import com.marcus.materialescolar.model.Material
 import com.marcus.materialescolar.view.MaterialClickCallback
 import com.marcus.materialescolar.view.adapter.MaterialAdapter
 import android.arch.lifecycle.ViewModelProviders
+import android.support.annotation.Nullable
 import com.marcus.materialescolar.view.viewmodel.MaterialListViewModel
 
 
@@ -27,14 +28,14 @@ class MaterialListFragment : Fragment() {
     private lateinit var mBinding: ListFragmentBinding
     private lateinit var mMaterialAdapter: MaterialAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    @Nullable
+    override fun onCreateView(inflater: LayoutInflater?, @Nullable container: ViewGroup?,
+                              @Nullable savedInstanceState: Bundle?): View? {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
 
         mMaterialAdapter = MaterialAdapter(mMaterialCallback)
-        mBinding.productsList.setAdapter(mMaterialAdapter)
-
+        mBinding.materialList.adapter = mMaterialAdapter
         return mBinding.root
     }
 

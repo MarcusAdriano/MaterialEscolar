@@ -15,7 +15,7 @@ import android.arch.persistence.db.SupportSQLiteDatabase
  * Created by Marcus on 31-Jan-18.
  *
  */
-@Database(entities = arrayOf(Material::class), version = 1)
+@Database(entities = arrayOf(Material::class), version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun materialDao(): MaterialDao
