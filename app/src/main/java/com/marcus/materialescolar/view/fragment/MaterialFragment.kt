@@ -8,10 +8,12 @@ import android.support.v4.app.Fragment
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import com.marcus.materialescolar.R
 import com.marcus.materialescolar.databinding.MaterialFragmentBinding
 import com.marcus.materialescolar.model.Material
 import com.marcus.materialescolar.view.viewmodel.MaterialViewModel
+import kotlinx.android.synthetic.main.material_fragment.*
 
 /**
  * Created by Marcus on 02-Feb-18.
@@ -20,21 +22,40 @@ import com.marcus.materialescolar.view.viewmodel.MaterialViewModel
 class MaterialFragment : Fragment() {
 
     private lateinit var mBinding: MaterialFragmentBinding
-    lateinit var material: Material
+    private lateinit var mViewModel: MaterialViewModel
+    private lateinit var mBtnNext : Button
+    private lateinit var mBtnPrev : Button
+    private var mIndex: Long = 0
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate this data binding layout
         mBinding = DataBindingUtil.inflate(inflater, R.layout.material_fragment, container, false)
         subscribeUi()
+
+        mBtnNext = mBinding.root.findViewById(R.id.btnNext)
+        mBtnPrev = mBinding.root.findViewById(R.id.btnPrev)
+
+        with(mBtnNext) {
+            setOnClickListener({ view ->
+                mViewModel.setId(mIndex++)
+            })
+        }
+
+        with(mBtnPrev) {
+            setOnClickListener({view ->
+                mViewModel.setId(mIndex--)
+            })
+        }
         return mBinding.root
     }
 
     private fun subscribeUi() {
-        val viewModel = ViewModelProviders.of(this).get(MaterialViewModel::class.java)
-        viewModel.setId(arguments.getLong(KEY_ID))
-        viewModel.material().observe(this, Observer<Material> {material ->
+        mViewModel = ViewModelProviders.of(this).get(MaterialViewModel::class.java)
+        mViewModel.material().observe(this, Observer<Material> {material ->
             mBinding.material = material
         })
+        mIndex = arguments.getLong(KEY_ID)
+        mViewModel.setId(mIndex)
     }
 
     companion object {
