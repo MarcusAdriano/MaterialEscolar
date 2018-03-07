@@ -36,13 +36,13 @@ class MaterialFragment : Fragment() {
         mBtnPrev = mBinding.root.findViewById(R.id.btnPrev)
 
         with(mBtnNext) {
-            setOnClickListener({ view ->
+            setOnClickListener({ _ ->
                 mViewModel.setId(mIndex++)
             })
         }
 
         with(mBtnPrev) {
-            setOnClickListener({view ->
+            setOnClickListener({ _ ->
                 mViewModel.setId(mIndex--)
             })
         }
