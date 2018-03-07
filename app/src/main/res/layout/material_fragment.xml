@@ -19,15 +19,12 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="com.marcus.materialescolar.model.Material"
+            alias="MyMaterial"/>
 
         <variable
-            name="isLoading"
-            type="boolean" />
-
-        <variable
-            name="model"
-            type="com.marcus.materialescolar.view.viewmodel.MaterialViewModel"/>
+            name="material"
+            type="MyMaterial"/>
     </data>
 
     <LinearLayout
@@ -38,7 +35,7 @@
 
         <include
             layout="@layout/material_item"
-            app:material="@{model.material}"/>
+            app:material="@{material}"/>
 
     </LinearLayout>
 </layout>

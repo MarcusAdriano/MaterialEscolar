@@ -16,7 +16,9 @@ import com.marcus.materialescolar.view.MaterialClickCallback
 import com.marcus.materialescolar.view.adapter.MaterialAdapter
 import android.arch.lifecycle.ViewModelProviders
 import android.support.annotation.Nullable
+import android.util.Log
 import com.marcus.materialescolar.view.viewmodel.MaterialListViewModel
+import kotlinx.android.synthetic.main.list_fragment.*
 
 
 /**
@@ -27,6 +29,7 @@ class MaterialListFragment : Fragment() {
 
     private lateinit var mBinding: ListFragmentBinding
     private lateinit var mMaterialAdapter: MaterialAdapter
+    private lateinit var mViewModel : MaterialListViewModel
 
     @Nullable
     override fun onCreateView(inflater: LayoutInflater?, @Nullable container: ViewGroup?,
@@ -41,38 +44,37 @@ class MaterialListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val viewModel = ViewModelProviders.of(this).get(MaterialListViewModel::class.java)
+        mViewModel = ViewModelProviders.of(this).get(MaterialListViewModel::class.java)
 
-        subscribeUi(viewModel)
+        subscribeUi()
+        fab_add.setOnClickListener({ (activity as MainActivity).addMaterial() })
     }
 
-    private fun subscribeUi(viewModel: MaterialListViewModel) {
+    private fun subscribeUi() {
         // Update the list when the data changes
-        viewModel.materiais.observe(this, object : Observer<List<Material>> {
-
-            override fun onChanged(myMateriais: List<Material>?) {
-                if (myMateriais != null) {
-                    mBinding.isLoading = false
-                    mMaterialAdapter.materialList = myMateriais
-                } else {
-                    mBinding.isLoading = true
-                }
-                // espresso does not know how to wait for data binding's loop so we execute changes
-                // sync.
-                mBinding.executePendingBindings()
+        mViewModel.materiais.observe(this, Observer<List<Material>> { myMateriais ->
+            Log.d(TAG, "Update material list")
+            if (myMateriais != null) {
+                mBinding.isLoading = false
+                mMaterialAdapter.setMaterialList(myMateriais)
+            } else {
+                mBinding.isLoading = true
             }
+            // espresso does not know how to wait for data binding's loop so we execute changes
+            // sync.
+            mBinding.executePendingBindings()
         })
     }
 
     private val mMaterialCallback = object : MaterialClickCallback {
         override fun onClick(material: Material) {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-                (activity as MainActivity).show(material)
+                (activity as MainActivity).showMaterial(material.id)
             }
         }
     }
 
     companion object {
-        val TAG = "MaterialListFragment"
+        const val TAG = "MaterialListFragment"
     }
 }

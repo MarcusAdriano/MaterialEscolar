@@ -8,8 +8,6 @@ import com.marcus.materialescolar.db.dao.MaterialDao
 import com.marcus.materialescolar.model.Material
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.arch.persistence.db.SupportSQLiteDatabase
-
 
 /**
  * Created by Marcus on 31-Jan-18.
@@ -52,5 +50,4 @@ abstract class AppDatabase : RoomDatabase() {
     fun getDatabaseCreated(): LiveData<Boolean> {
         return databaseCreated
     }
-
 }

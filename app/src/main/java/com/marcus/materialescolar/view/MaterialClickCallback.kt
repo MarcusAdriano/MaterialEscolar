@@ -4,6 +4,7 @@ import com.marcus.materialescolar.model.Material
 
 /**
  * Created by Marcus on 02-Feb-18.
+ *
  */
 interface MaterialClickCallback {
 

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Material Escolar</string>
-    <string name="loading">Carregando</string>
+    <string name="loading">Não há itens</string>
     <string name="cd_materiais_list">Content Description</string>
+    <string name="material_name">Name</string>
+    <string name="save">Save</string>
 </resources>

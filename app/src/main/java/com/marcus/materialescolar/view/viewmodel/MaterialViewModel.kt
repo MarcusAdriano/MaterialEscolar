@@ -3,47 +3,27 @@ package com.marcus.materialescolar.view.viewmodel
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import android.databinding.ObservableField
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
+import com.marcus.materialescolar.App
 import com.marcus.materialescolar.DataRepository
 import com.marcus.materialescolar.model.Material
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import com.marcus.materialescolar.App
-
 
 /**
- * Created by Marcus on 02-Feb-18.
+ * Created by Marcus on 07-Mar-18.
  *
  */
-class MaterialViewModel(application: Application, private val dataRepository: DataRepository, id: Long) :
-            AndroidViewModel(application) {
+class MaterialViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val material: ObservableField<Material> = ObservableField()
-    private val mObservableMaterial: LiveData<Material> = dataRepository.getMaterial(id)
+    private val dataRepository: DataRepository = (application as App).getRepository()
 
-    fun setMaterial(material: Material) {
-        this.material.set(material)
-    }
+    /** when user select a material from Material List **/
+    private val idLiveData: MutableLiveData<Long> = MutableLiveData()
 
-    fun getMaterial() : Material = material.get()
+    fun setId(newValue: Long) { idLiveData.postValue(newValue) }
 
-    fun getObservableMaterial(): LiveData<Material> {
-        return mObservableMaterial
-    }
-
-    class Factory(private val mApplication: Application, private val mMaterialId: Long) :
-            ViewModelProvider.NewInstanceFactory() {
-
-        private val mRepository: DataRepository
-
-        init {
-            mRepository = (mApplication as App).getRepository()
-        }
-
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-
-            return MaterialViewModel(mApplication, mRepository, mMaterialId) as T
-        }
-    }
+    fun material() : LiveData<Material> =
+            Transformations.switchMap(idLiveData, { id ->
+                dataRepository.getMaterial(id) })
 
 }

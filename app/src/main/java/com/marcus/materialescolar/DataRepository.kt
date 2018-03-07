@@ -9,25 +9,9 @@ import android.arch.lifecycle.LiveData
  * Created by Marcus on 02-Feb-18.
  *
  */
-class DataRepository {
+class DataRepository private constructor(private var appDatabase: AppDatabase) {
 
-    private var appDatabase: AppDatabase
-    private var mObservableMaterial: MediatorLiveData<List<Material>>
-
-    private constructor(appDatabase: AppDatabase) {
-        this.appDatabase = appDatabase
-        mObservableMaterial = MediatorLiveData()
-
-        mObservableMaterial.addSource(
-                appDatabase.materialDao().getAll(),
-                    {materiais -> run {
-                        if (appDatabase.getDatabaseCreated().value != null) {
-                            mObservableMaterial.postValue(materiais)
-                        }
-                    }
-                })
-
-    }
+    private var mObservableMaterial: LiveData<List<Material>> = appDatabase.materialDao().getAll()
 
     companion object {
         private var INSTANCE: DataRepository? = null

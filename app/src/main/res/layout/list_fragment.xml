@@ -25,11 +25,10 @@
             type="boolean" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardview_light_background"
-        android:orientation="vertical">
+        android:background="@color/cardview_light_background" >
 
         <TextView
             android:id="@+id/loading_tv"
@@ -48,5 +47,16 @@
             app:layoutManager="LinearLayoutManager"
             app:visibleGone="@{!isLoading}"/>
 
-    </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_margin="16dp"
+            app:fabSize="normal"
+            android:tint="@android:color/white"
+            android:src="@drawable/ic_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
 </layout>
