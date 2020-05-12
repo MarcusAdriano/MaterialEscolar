@@ -1,12 +1,12 @@
-# Material Escolar
+# A simple app using JetPack's features. 
 
-Aplicativo desenvolvido por mim usando Kotlin com o intuito principal em aprender a linguagem em questão.
+Language used: Kotlin
 
-Funcionalidades:
+Features:
 
-* Salvar uma simples lista de material escolar
+* Save and View a List of items (brand, unit price, total value)
 
-Aprendizado:
+JetPack features:
 * ViewModel
 * Room
 * LifeCycle
